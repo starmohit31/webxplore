@@ -75,15 +75,15 @@ export function Stars({ n = 5 }) {
 /* Brand mark */
 export function Logo({ light = false }) {
   return (
-<span className="flex items-center gap-2.5">
-  <span className="h-14 w-[180px] flex items-center justify-center">
-    <img
-      src="/logo.png"
-      alt="Webxplore Logo"
-      className="h-full w-full object-contain"
-    />
-  </span>
-</span>
+    <span className="flex items-center gap-2.5">
+      <span className="h-14 w-[180px] flex items-center justify-center">
+        <img
+          src={`${import.meta.env.BASE_URL}logo.png`}
+          alt="Webxplore Logo"
+          className="h-full w-full object-contain"
+        />
+      </span>
+    </span>
   )
 }
 
