@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Design tokens
+   Palette : dark navy, white, electric blue -> violet accents
+   Type    : Plus Jakarta Sans (display) + Inter (body)
+   Spacing : sections use .section (py-20 / lg:py-28), container is .container-x
+------------------------------------------------------------------- */
+:root {
+  --navy-950: #050816;
+  --navy-900: #0a1128;
+  --brand: #5b6cff;
+  --violet: #8b5cf6;
+  --ink: #0a1128;
+  --muted: #5b6585;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-slate-700 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-navy-900;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2;
+  }
+  ::selection {
+    background: rgba(91, 108, 255, 0.25);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+  .section {
+    @apply py-20 lg:py-28;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #5b6cff 0%, #8b5cf6 55%, #c084fc 100%);
+  }
+  .gradient-bg {
+    background-image: linear-gradient(120deg, #4455f0 0%, #7c3aed 100%);
+  }
+  .glass {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-xl;
+  }
+  .glass-light {
+    @apply border border-white/60 bg-white/70 backdrop-blur-xl;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 75%);
+  }
+  .dot-bg {
+    background-image: radial-gradient(rgba(10,17,40,0.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 focus-visible:ring-offset-0;
+  }
+  .btn-primary {
+    @apply btn gradient-bg text-white shadow-lg shadow-brand-600/30 hover:-translate-y-0.5 hover:shadow-glow;
+  }
+  .btn-secondary {
+    @apply btn border border-white/20 bg-white/5 text-white backdrop-blur hover:-translate-y-0.5 hover:bg-white/10;
+  }
+  .btn-outline {
+    @apply btn border border-slate-200 bg-white text-navy-900 hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-600;
+  }
+  .btn-dark {
+    @apply btn bg-navy-900 text-white hover:-translate-y-0.5 hover:bg-navy-700;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-600;
+  }
+  .eyebrow-dark {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-400;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[15px] text-navy-900 placeholder:text-slate-400 transition focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15;
+  }
+  .input-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-500/15;
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Prose for blog / case-study body */
+.prose-x p { @apply mb-5 text-[17px] leading-8 text-slate-600; }
+.prose-x h2 { @apply mb-4 mt-10 text-2xl font-bold; }
+.prose-x ul { @apply mb-5 list-disc space-y-2 pl-6 text-[17px] leading-8 text-slate-600; }
